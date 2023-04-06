@@ -25,9 +25,22 @@ Cat::Cat( const Cat &copy )
 
 Cat &Cat::operator=( const Cat &copy )
 {
-		if (this != &copy)
-	{
-		this->type = copy.type;
-	}
+	this->type = copy.getType();
+	*(this->_brain) = *(copy.getBrain());
+
 	return *this;
+}
+
+Animal	&Cat::operator=( const Animal &copy )
+{
+	std::cout << "Cat operator = called" << std::endl;
+	this->type = copy.getType();
+	this->_brain = new Brain(*copy.getBrain());
+
+	return *this;
+}
+
+Brain	*Cat::getBrain( void ) const
+{
+	return (this->_brain);
 }

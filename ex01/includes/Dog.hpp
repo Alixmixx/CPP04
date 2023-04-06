@@ -10,7 +10,13 @@ class Dog : public Animal
 		Dog();
 		Dog( const Dog &copy );
 		Dog &operator=( const Dog &copy );
+		Animal &operator=( const Animal &copy );
 		~Dog();
+
+		Brain *getBrain( void ) const;
+
+	private:
+		Brain	*_brain;
 };
 
 #endif

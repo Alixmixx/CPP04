@@ -11,7 +11,10 @@ class Cat : public Animal
 		Cat();
 		Cat( const Cat &copy );
 		Cat &operator=( const Cat &copy );
+		Animal &operator=( const Animal &copy );
 		~Cat();
+
+		Brain *getBrain( void ) const;
 
 	private:
 		Brain	*_brain;
