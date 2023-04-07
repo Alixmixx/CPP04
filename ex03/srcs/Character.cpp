@@ -16,7 +16,7 @@ Character::Character( std::string const &name )
 
 Character::~Character( void )
 {
-
+	
 }
 
 Character::Character( const Character &copy )
@@ -46,15 +46,33 @@ std::string const &Character::getName( void ) const
 
 void Character::equip( AMateria *m )
 {
-
+	if (this->_NbItems == Character::_inventorySize)
+	{
+		std::cout << "Inventory full" << std::endl;
+		return;
+	}
+	this->_inventory[this->_NbItems] = m;
+	this->_NbItems++;
+	std::cout << this->_name << " equipped a "
+		<< m.getType() << std::endl;
 }
 
 void Character::unequip( int idx )
 {
-
+	if (idx < 0 || idx >= Character::_inventorySize)
+	{
+		std::cout << "Wrong index" << std::endl;
+		return;
+	}
+	std::cout << this->_name << " dropped a "
+		<< this->_inventory[idx]->getType() << std::endl;
+	this->_inventory[idx] = NULL;
 }
 
 void Character::use( int idx, ICharacter &target )
 {
-
+	if (idx < 0 || idx > Character::_inventorySize)
+		return;
+	this->_inventory[idx]->use(target);
+	this->unequip(idx);
 }
