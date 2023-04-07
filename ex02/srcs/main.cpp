@@ -1,4 +1,4 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 
@@ -6,8 +6,10 @@
 
 int	main( void )
 {
-	Animal	*animals[10];
+	AAnimal	*animals[10];
 	Brain	*brain;
+
+	//AAnimal *mouse = new AAnimal();
 
 	for (int i = 0; i < 10; i++)
 	{

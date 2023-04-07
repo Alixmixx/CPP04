@@ -2,7 +2,7 @@
 #include <iostream>
 
 Cat::Cat()
-	:Animal()
+	:AAnimal()
 {
 	std::cout << "Cat constructor called" << std::endl;
 	this->type = "Cat";
@@ -18,7 +18,7 @@ Cat::~Cat()
 }
 
 Cat::Cat( const Cat &copy )
-	:Animal(copy)
+	:AAnimal(copy)
 {
 	this->operator=(copy);
 }
@@ -32,9 +32,9 @@ Cat &Cat::operator=( const Cat &copy )
 	return *this;
 }
 
-Animal	&Cat::operator=( const Animal &copy )
+AAnimal	&Cat::operator=( const AAnimal &copy )
 {
-	std::cout << "Animal::Cat operator = called" << std::endl;
+	std::cout << "AAnimal::Cat operator = called" << std::endl;
 	this->type = copy.getType();
 	*(this->_brain) = *(copy.getBrain());
 
