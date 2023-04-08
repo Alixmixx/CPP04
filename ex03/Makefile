@@ -8,7 +8,7 @@ D		= deps/
 
 NAME	= animals
 
-SRCS	= main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+SRCS	= main.cpp AMateria.cpp Character.cpp Ice.cpp MateriaSource.cpp
 
 CC		= c++
 

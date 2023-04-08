@@ -16,7 +16,12 @@ Character::Character( std::string const &name )
 
 Character::~Character( void )
 {
-	
+	std::cout << "Character destructor called" << std::endl;
+	for (int i = 0; i < Character::_inventorySize; i++)
+	{
+		if (this->_inventory[i])
+			delete this->_inventory[i];
+	}
 }
 
 Character::Character( const Character &copy )
@@ -51,7 +56,11 @@ void Character::equip( AMateria *m )
 		std::cout << "Inventory full" << std::endl;
 		return;
 	}
-	this->_inventory[this->_NbItems] = m;
+
+	int i = 0;
+	while (this->_inventory[i] != NULL)
+		i++;
+	this->_inventory[i] = m;
 	this->_NbItems++;
 	std::cout << this->_name << " equipped a "
 		<< m.getType() << std::endl;
@@ -64,8 +73,16 @@ void Character::unequip( int idx )
 		std::cout << "Wrong index" << std::endl;
 		return;
 	}
+
+	if (this->_NbItems <= 0 || this->_inventory[i] == NULL)
+	{
+		std::cout << "Inventory spot empty" << std::endl;
+		return;
+	}
+
 	std::cout << this->_name << " dropped a "
 		<< this->_inventory[idx]->getType() << std::endl;
+	this->_NbItems--;
 	this->_inventory[idx] = NULL;
 }
 
