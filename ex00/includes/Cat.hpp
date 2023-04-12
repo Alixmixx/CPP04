@@ -11,6 +11,10 @@ class Cat : public Animal
 		Cat( const Cat &copy );
 		Cat &operator=( const Cat &copy );
 		~Cat();
+
+		void makeSound( void ) const;
 };
+
+std::ostream &operator<<( std::ostream &outStream, const Cat &cat );
 
 #endif

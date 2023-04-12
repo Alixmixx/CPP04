@@ -24,7 +24,17 @@ DEPS	= $(SRCS:$S%=$D%.d)
 
 RM		= /bin/rm -rf
 
-.PHONY: all clean fclean re test
+END=\033[0m
+GRAY = \033[0;90m
+RED = \033[0;91m
+GREEN = \033[0;92m
+YELLOW = \033[0;93m
+BLUE = \033[0;94m
+MAGENTA = \033[0;95m
+CYAN = \033[0;96m
+WHITE = \033[0;97m
+
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
@@ -34,9 +44,9 @@ $O:
 $(OBJS): | $O
 
 $(OBJS): $O%.o: $S%
-	@echo "Compiling $^: "
+	@echo "$(YELLOW)Compiling $^: $(END)"
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "✓"
+	@echo "$(GREEN)✓$(END)"
 
 $D:
 	@mkdir $@
@@ -47,20 +57,17 @@ $(DEPS): $D%.d: $S%
 	@$(CC) $(CFLAGS) -MM -MF $@ -MT "$O$*.o $@" $<
 
 $(NAME): $(OBJS)
-	@echo "Assembling $(NAME)"
+	@echo "$(MAGENTA)$(NAME) is compiled$(END)"
 	@$(CC) $(LDFLAGS) $^ -o $@
 
 clean:
-	@echo "Cleaning up..."
+	@echo "$(RED)Removing objs$(END)"
 	@$(RM) $D $O
 
 fclean: clean
-	@echo "Everything!"
+	@echo "$(RED)Removed executable$(END)"
 	@$(RM) $(NAME)
 
 re: fclean all
-
-test: $(NAME)
-	./$(NAME)
 
 -include $(DEPS)

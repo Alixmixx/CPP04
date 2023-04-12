@@ -9,12 +9,15 @@ class Animal
 		Animal();
 		Animal( const Animal &copy );
 		Animal &operator=( const Animal &copy );
-		~Animal();
-		void makeSound( void ) const;
+		virtual ~Animal();
+
+		virtual void makeSound( void ) const;
 		const std::string &getType( void ) const;
 
 	protected:
 		std::string type;
 };
+
+std::ostream &operator<<( std::ostream &outStream, const Animal &animal );
 
 #endif

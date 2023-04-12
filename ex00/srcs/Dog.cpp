@@ -16,14 +16,25 @@ Dog::~Dog()
 Dog::Dog( const Dog &copy )
 	:Animal(copy)
 {
-	this->operator=(copy);
+	*this = copy;
 }
 
 Dog &Dog::operator=( const Dog &copy )
 {
-		if (this != &copy)
+	if (this != &copy)
 	{
 		this->type = copy.type;
 	}
 	return *this;
+}
+
+void Dog::makeSound( void ) const
+{
+	std::cout << "Woof woof" << std::endl;
+}
+
+std::ostream &operator<<( std::ostream &outStream, const Dog &dog )
+{
+	outStream << "Animal: " << dog.getType() << std::endl;
+	return (outStream);
 }

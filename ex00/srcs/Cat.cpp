@@ -16,14 +16,25 @@ Cat::~Cat()
 Cat::Cat( const Cat &copy )
 	:Animal(copy)
 {
-	this->operator=(copy);
+	*this = copy;
 }
 
 Cat &Cat::operator=( const Cat &copy )
 {
-		if (this != &copy)
+	if (this != &copy)
 	{
 		this->type = copy.type;
 	}
 	return *this;
+}
+
+void Cat::makeSound( void ) const
+{
+	std::cout << "Miao miao" << std::endl;
+}
+
+std::ostream &operator<<( std::ostream &outStream, const Cat &cat )
+{
+	outStream << "Animal: " << cat.getType() << std::endl;
+	return (outStream);
 }

@@ -14,12 +14,12 @@ WrongAnimal::~WrongAnimal()
 
 WrongAnimal::WrongAnimal( const WrongAnimal &copy )
 {
-	this->operator=(copy);
+	*this = copy;
 }
 
 WrongAnimal &WrongAnimal::operator=( const WrongAnimal &copy )
 {
-		if (this != &copy)
+	if (this != &copy)
 	{
 		this->type = copy.type;
 	}
@@ -28,11 +28,16 @@ WrongAnimal &WrongAnimal::operator=( const WrongAnimal &copy )
 
 void WrongAnimal::makeSound( void ) const
 {
-	if (this->type == "WrongCat")
-		std::cout << "oaiM oaiM" << std::endl;
+	std::cout << "*Wrong silence*" << std::endl;
 }
 
 const std::string &WrongAnimal::getType( void ) const
 {
 	return (this->type);
+}
+
+std::ostream &operator<<( std::ostream &outStream, const WrongAnimal &wrongAnimal )
+{
+	outStream << "Animal " << wrongAnimal.getType() << std::endl;
+	return (outStream);
 }

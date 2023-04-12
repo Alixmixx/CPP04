@@ -16,12 +16,17 @@ WrongCat::~WrongCat()
 WrongCat::WrongCat( const WrongCat &copy )
 	:WrongAnimal(copy)
 {
-	this->operator=(copy);
+	*this = copy;
+}
+
+void WrongCat::makeSound( void ) const
+{
+	std::cout << "Oaim oaim" << std::endl;
 }
 
 WrongCat &WrongCat::operator=( const WrongCat &copy )
 {
-		if (this != &copy)
+	if (this != &copy)
 	{
 		this->type = copy.type;
 	}

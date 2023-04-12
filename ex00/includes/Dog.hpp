@@ -11,6 +11,10 @@ class Dog : public Animal
 		Dog( const Dog &copy );
 		Dog &operator=( const Dog &copy );
 		~Dog();
+
+		void makeSound( void ) const;
 };
+
+std::ostream &operator<<( std::ostream &outStream, const Dog &dog );
 
 #endif

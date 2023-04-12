@@ -14,12 +14,12 @@ Animal::~Animal()
 
 Animal::Animal( const Animal &copy )
 {
-	this->operator=(copy);
+	*this = copy;
 }
 
 Animal &Animal::operator=( const Animal &copy )
 {
-		if (this != &copy)
+	if (this != &copy)
 	{
 		this->type = copy.type;
 	}
@@ -28,13 +28,16 @@ Animal &Animal::operator=( const Animal &copy )
 
 void Animal::makeSound( void ) const
 {
-	if (this->type == "Cat")
-		std::cout << "Miao miao" << std::endl;
-	else if (this->type == "Dog")
-		std::cout << "Woaf woaf" << std::endl;
+	std::cout << "*Pure silence*" << std::endl;
 }
 
 const std::string &Animal::getType( void ) const
 {
 	return (this->type);
+}
+
+std::ostream &operator<<( std::ostream &outStream, const Animal &animal )
+{
+	outStream << "Animal: " << animal.getType() << std::endl;
+	return (outStream);
 }

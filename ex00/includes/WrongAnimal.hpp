@@ -10,11 +10,14 @@ class WrongAnimal
 		WrongAnimal( const WrongAnimal &copy );
 		WrongAnimal &operator=( const WrongAnimal &copy );
 		~WrongAnimal();
-		void makeSound( void ) const;
+
+		virtual void makeSound( void ) const;
 		const std::string &getType( void ) const;
 
 	protected:
 		std::string type;
 };
+
+std::ostream &operator<<( std::ostream &outStream, const WrongAnimal &wrongAnimal );
 
 #endif
