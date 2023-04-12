@@ -15,7 +15,7 @@ Brain::~Brain()
 
 Brain::Brain( const Brain &copy )
 {
-	this->operator=(copy);
+	*this = copy;
 }
 
 Brain &Brain::operator=( const Brain &copy)
@@ -24,4 +24,18 @@ Brain &Brain::operator=( const Brain &copy)
 	for (int i = 0; i < Brain::_nbIdeas; i++)
 		this->ideas[i] = copy.ideas[i];
 	return *this;
+}
+
+int	Brain::getNbIdeas( void ) const
+{
+	return (_nbIdeas);
+}
+
+std::ostream &operator<<( std::ostream &outStream, const Brain &element )
+{
+	outStream << "Ideas:" << std::endl;
+	for (int i = 0; i < element.getNbIdeas(); i++)
+		outStream << element.ideas[i] << " ";
+	outStream << std::endl;
+	return (outStream);
 }

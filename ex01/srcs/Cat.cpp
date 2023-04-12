@@ -20,28 +20,41 @@ Cat::~Cat()
 Cat::Cat( const Cat &copy )
 	:Animal(copy)
 {
-	this->operator=(copy);
+	*this = copy;
 }
 
 Cat &Cat::operator=( const Cat &copy )
 {
-	std::cout << "Cat operator = called" << std::endl;
-	this->type = copy.getType();
-	this->_brain = new Brain(*copy.getBrain());
-
+	if (this != &copy)
+	{
+		this->type = copy.getType();
+		this->_brain = new Brain(*copy.getBrain());
+	}
 	return *this;
 }
 
 Animal	&Cat::operator=( const Animal &copy )
 {
-	std::cout << "Animal::Cat operator = called" << std::endl;
-	this->type = copy.getType();
-	*(this->_brain) = *(copy.getBrain());
-
+	if (this != &copy)
+	{
+		this->type = copy.getType();
+		*(this->_brain) = *(copy.getBrain());
+	}
 	return *this;
+}
+
+void Cat::makeSound( void ) const
+{
+	std::cout << "Miao miao" << std::endl;
 }
 
 Brain	*Cat::getBrain( void ) const
 {
 	return (this->_brain);
+}
+
+std::ostream &operator<<( std::ostream &outStream, const Cat &cat )
+{
+	outStream << "Animal: " << cat.getType() << std::endl;
+	return (outStream);
 }
