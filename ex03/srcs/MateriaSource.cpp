@@ -4,7 +4,7 @@ MateriaSource::MateriaSource()
 	:_NbMaterias(0)
 {
 	for (int i = 0; i < MateriaSource::_MateriaSize; i++)
-		this->_Materias[i] = NULL;
+		_Materias[i] = NULL;
 }
 
 MateriaSource::MateriaSource( const MateriaSource &copy )
@@ -14,14 +14,14 @@ MateriaSource::MateriaSource( const MateriaSource &copy )
 
 MateriaSource &MateriaSource::operator=( const MateriaSource &copy )
 {
-		for (int i = 0; i < MateriaSource::_materias_size; i++)
+		for (int i = 0; i < MateriaSource::_Materias_size; i++)
 	{
-		if (this->_materias[i])
-			delete this->_materias[i];
-		if (copy._materias[i])
-			this->_materias[i] = copy._materias[i]->clone();
+		if (_Materias[i])
+			delete _Materias[i];
+		if (copy._Materias[i])
+			_Materias[i] = copy._Materias[i]->clone();
 		else
-			this->_materias[i] = NULL;
+			_Materias[i] = NULL;
 	}
 	return *this;
 }
@@ -30,29 +30,29 @@ MateriaSource::~MateriaSource()
 {
 	for (int i = 0; i < MateriaSource::_MateriaSize; i++)
 	{
-		if (this->_Materias[i])
-			delete	this->_Materias[i];
+		if (_Materias[i])
+			delete	_Materias[i];
 	}
 }
 
 void MateriaSource::learnMateria( AMateria *to_learn )
 {
-	if (this->_NbMaterias >= MateriaSource::_MateriaSize)
+	if (_NbMaterias >= MateriaSource::_MateriaSize)
 		std::cout << "MateriaSource is full" << std::endl;
 	else
 	{
-		this->_Materias[this->_NbMaterias] = to_learn;
-		this->_NbMaterias++;
-		std::cout << "Learned " << to_learn.getType() << std:endl;
+		_Materias[_NbMaterias] = to_learn;
+		_NbMaterias++;
+		std::cout << "Learned " << to_learn->getType() << std:endl;
 	}
 }
 
-AMateria *MateriaSource::creatMateria( std::string const &type )
+AMateria *MateriaSource::createMateria( std::string const &type )
 {
-	for (int i = 0; i < MateriaSource::_MateriaSize && this->_Materias[i]; i++)
+	for (int i = 0; i < MateriaSource::_MateriaSize && _Materias[i]; i++)
 	{
-		if (type == this->_Materias[i]->getType())
-			return this->_Materias[i]->clone();
+		if (type == _Materias[i]->getType())
+			return _Materias[i]->clone();
 	}
 	return NULL;
 }
@@ -61,8 +61,8 @@ void MateriaSource::printMaterias( void ) const
 {
 	for (int i = 0; i < MateriaSource::_MateriaSize; i++)
 	{
-		if (this->_Materias[i])
-			std::cout << i << ": " << this->_Materias[i]->getType() << std::endl;
+		if (_Materias[i])
+			std::cout << i << ": " << _Materias[i]->getType() << std::endl;
 		else
 			std::cout << i << ": empty" << std::endl;
 	}

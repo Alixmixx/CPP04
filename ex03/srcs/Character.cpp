@@ -5,13 +5,13 @@ Character::Character( void )
 	_name("")
 {
 	for (size_t i = 0; i < Character::_inventorySize; i++)
-		this->_inventory[i] = NULL;
+		_inventory[i] = NULL;
 }
 
 Character::Character( std::string const &name )
 {
 	*this = Character();
-	this->_name = name;
+	_name = name;
 }
 
 Character::~Character( void )
@@ -19,8 +19,8 @@ Character::~Character( void )
 	std::cout << "Character destructor called" << std::endl;
 	for (int i = 0; i < Character::_inventorySize; i++)
 	{
-		if (this->_inventory[i])
-			delete this->_inventory[i];
+		if (_inventory[i])
+			delete _inventory[i];
 	}
 }
 
@@ -31,39 +31,39 @@ Character::Character( const Character &copy )
 
 Character &Character::operator=( const Character &copy )
 {
-	this->_NbItems = 0;
+	_NbItems = 0;
 	for (int i = 0; i < Character::_inventorySize; i++)
 	{
-		if (this->_inventory[i])
-			delete this->_inventory[i];
-		this->_inventory[i] = copy._inventory[i];
+		if (_inventory[i])
+			delete _inventory[i];
+		_inventory[i] = copy._inventory[i];
 		if (copy._inventory[i])
-			this->_NbItems++;
+			_NbItems++;
 	}
-	this->_name = copy.getName();
+	_name = copy.getName();
 	return *this;
 }
 
 std::string const &Character::getName( void ) const
 {
-	return (this->name);
+	return (_name);
 }
 
 void Character::equip( AMateria *m )
 {
-	if (this->_NbItems == Character::_inventorySize)
+	if (_NbItems == Character::_inventorySize)
 	{
 		std::cout << "Inventory full" << std::endl;
 		return;
 	}
 
 	int i = 0;
-	while (this->_inventory[i] != NULL)
+	while (_inventory[i] != NULL)
 		i++;
-	this->_inventory[i] = m;
-	this->_NbItems++;
+	_inventory[i] = m;
+	_NbItems++;
 	std::cout << this->_name << " equipped a "
-		<< m.getType() << std::endl;
+		<< m->getType() << std::endl;
 }
 
 void Character::unequip( int idx )
@@ -74,22 +74,22 @@ void Character::unequip( int idx )
 		return;
 	}
 
-	if (this->_NbItems <= 0 || this->_inventory[i] == NULL)
+	if (_NbItems == 0 || _inventory[idx] == NULL)
 	{
 		std::cout << "Inventory spot empty" << std::endl;
 		return;
 	}
 
-	std::cout << this->_name << " dropped a "
-		<< this->_inventory[idx]->getType() << std::endl;
-	this->_NbItems--;
-	this->_inventory[idx] = NULL;
+	std::cout << _name << " dropped a "
+		<< _inventory[idx]->getType() << std::endl;
+	_NbItems--;
+	_inventory[idx] = NULL;
 }
 
 void Character::use( int idx, ICharacter &target )
 {
 	if (idx < 0 || idx > Character::_inventorySize)
 		return;
-	this->_inventory[idx]->use(target);
+	_inventory[idx]->use(target);
 	this->unequip(idx);
 }

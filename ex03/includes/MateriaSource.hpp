@@ -2,8 +2,10 @@
 # define MATERIA_SOURCE_HPP
 
 #include "IMateriaSource.hpp"
+#include <string>
+#include <iostream>
 
-class MateriaSource : class IMateriaSource
+class MateriaSource : public IMateriaSource
 {
 	public:
 		MateriaSource( void );
@@ -12,7 +14,7 @@ class MateriaSource : class IMateriaSource
 		~MateriaSource( void );
 
 		virtual void learnMateria( AMateria *to_learn );
-		virtual AMateria *creatMateria( std::string const &type );
+		virtual AMateria *createMateria( std::string const &type );
 		void printMaterias( void ) const;
 
 	private:
