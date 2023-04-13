@@ -6,30 +6,55 @@
 
 int	main( void )
 {
-	Animal	*animals[10];
+ 	Animal	*animals[6];
 	Brain	*brain;
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 6; i++)
 	{
- 		if (i < 10 / 2)
+ 		if (i < 6 / 2)
 			animals[i] = new Dog();
 		else
 			animals[i] = new Cat();
 		std::cout << animals[i]->getType() << "  " << i + 1 << '\n' << std::endl;
 	}
 
-	brain = animals[7]->getBrain();
+	std::cout << animals[5]->getType() << " thinks: " << animals[5]->getBrain()->ideas[0] << std::endl;
+
+	brain = animals[5]->getBrain();
 	brain->ideas[0] = "I'm hungry";
 	brain->ideas[1] = "That's a strange idea I'm having";
 	brain->ideas[2] = "Ball!!!!!";
-	brain->ideas[3] = "Squirrel!!!!!";
-	std::cout << animals[7]->getBrain()->ideas[0] << std::endl;
 
-	*(animals[5]) = *(animals[7]);
+	std::cout << animals[5]->getType() << " thinks: " << animals[5]->getBrain()->ideas[0] << std::endl;
 
 	std::cout << '\n' << std::endl;
-	std::cout << animals[5]->getBrain()->ideas[2] << std::endl;
+	std::cout << animals[2]->getType() << " thinks: " << animals[2]->getBrain()->ideas[2] << '\n' << std::endl;
 
-	for (int i = 0; i < 10; i++)
+	*(animals[2]) = *(animals[5]);
+
+	std::cout << '\n' << animals[2]->getType() << " thinks: " << animals[2]->getBrain()->ideas[2] << '\n' << std::endl;
+
+	for (int i = 0; i < 6; i++)
 		delete animals[i];
+
+/*  	Animal* j = new Dog();
+	std::cout << std::endl;
+	Animal* i = new Dog();
+	std::cout << std::endl;
+
+	i->getBrain()->ideas[0] = "miao";
+
+	std::cout << i->getBrain()->ideas[0] << std::endl;
+
+	std::cout << j->getBrain()->ideas[0] << std::endl;
+
+	*j = *i;
+
+	std::cout << i->getBrain()->ideas[0] << std::endl;
+
+	std::cout << j->getBrain()->ideas[0] << std::endl;
+
+	delete j;//should not create a leak
+	delete i; */
+	return 0;
 }

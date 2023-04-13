@@ -12,7 +12,7 @@ Dog::Dog()
 
 Dog::~Dog()
 {
-	std::cout << "Dog destructor called" << std::endl;
+	//std::cout << "Dog destructor called" << std::endl;
 
 	delete this->_brain;
 }
@@ -25,9 +25,11 @@ Dog::Dog( const Dog &copy )
 
 Dog &Dog::operator=( const Dog &copy )
 {
+	std::cout << "Dog = called" << std::endl;
 	if (this != &copy)
 	{
 		this->type = copy.getType();
+		delete this->_brain;
 		this->_brain = new Brain(*copy.getBrain());
 	}
 	return *this;

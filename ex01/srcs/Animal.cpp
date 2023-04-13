@@ -9,16 +9,17 @@ Animal::Animal()
 
 Animal::~Animal()
 {
-	std::cout << "Animal destructor called" << std::endl;
+	//std::cout << "Animal destructor called" << std::endl;
 }
 
 Animal::Animal( const Animal &copy )
 {
-	*this = copy;
+	type = copy.type;
 }
 
 Animal &Animal::operator=( const Animal &copy )
 {
+	std::cout << "Animal = called" << std::endl;
 	if (this != &copy)
 	{
 		this->type = copy.type;

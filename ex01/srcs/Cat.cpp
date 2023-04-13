@@ -12,7 +12,7 @@ Cat::Cat()
 
 Cat::~Cat()
 {
-	std::cout << "Cat destructor called" << std::endl;
+	//std::cout << "Cat destructor called" << std::endl;
 
 	delete this->_brain;
 }
@@ -20,7 +20,7 @@ Cat::~Cat()
 Cat::Cat( const Cat &copy )
 	:Animal(copy)
 {
-	*this = copy;
+	this->_brain = new Brain(*copy.getBrain());
 }
 
 Cat &Cat::operator=( const Cat &copy )
@@ -28,6 +28,7 @@ Cat &Cat::operator=( const Cat &copy )
 	if (this != &copy)
 	{
 		this->type = copy.getType();
+		delete this->_brain;
 		this->_brain = new Brain(*copy.getBrain());
 	}
 	return *this;
