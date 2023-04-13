@@ -14,10 +14,13 @@ class Cat : public AAnimal
 		AAnimal &operator=( const AAnimal &copy );
 		~Cat();
 
+		void makeSound( void ) const;
 		Brain *getBrain( void ) const;
 
 	private:
 		Brain	*_brain;
 };
+
+std::ostream &operator<<( std::ostream &outStream, const Cat &cat );
 
 #endif

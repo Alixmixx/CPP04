@@ -12,7 +12,7 @@ Dog::Dog()
 
 Dog::~Dog()
 {
-	std::cout << "Dog destructor called" << std::endl;
+	//std::cout << "Dog destructor called" << std::endl;
 
 	delete this->_brain;
 }
@@ -20,27 +20,43 @@ Dog::~Dog()
 Dog::Dog( const Dog &copy )
 	:AAnimal(copy)
 {
-	this->operator=(copy);
+	*this = copy;
 }
 
 Dog &Dog::operator=( const Dog &copy )
 {
-	std::cout << "Dog operator = called" << std::endl;
-	this->type = copy.getType();
-	this->_brain = new Brain(*copy.getBrain());
-
+	std::cout << "Dog = called" << std::endl;
+	if (this != &copy)
+	{
+		this->type = copy.getType();
+		delete this->_brain;
+		this->_brain = new Brain(*copy.getBrain());
+	}
 	return *this;
 }
 
 AAnimal	&Dog::operator=( const AAnimal &copy )
 {
-	std::cout << "AAnimal::Dog operator = called" << std::endl;
-	this->type = copy.getType();
-	*(this->_brain) = *(copy.getBrain());
+	if (this != &copy)
+	{
+		this->type = copy.getType();
+		*(this->_brain) = *(copy.getBrain());
+	}
 	return *this;
+}
+
+void Dog::makeSound( void ) const
+{
+	std::cout << "Woof woof" << std::endl;
 }
 
 Brain	*Dog::getBrain( void ) const
 {
 	return (this->_brain);
+}
+
+std::ostream &operator<<( std::ostream &outStream, const Dog &dog )
+{
+	outStream << "Animal: " << dog.getType() << std::endl;
+	return (outStream);
 }

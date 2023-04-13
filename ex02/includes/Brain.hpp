@@ -12,10 +12,13 @@ class Brain
 	public:
 		Brain();
 		Brain( const Brain &copy );
-		Brain &operator=( const Brain &copy);
+		Brain &operator=( const Brain &copy );
 		~Brain();
 
+		int	getNbIdeas( void ) const;
 		std::string	ideas[_nbIdeas];
 };
+
+std::ostream &operator<<( std::ostream &outStream, const Brain &element );
 
 #endif

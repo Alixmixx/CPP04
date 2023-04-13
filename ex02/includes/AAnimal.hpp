@@ -8,14 +8,16 @@ class AAnimal
 {
 	public:
 		virtual ~AAnimal();
-		virtual AAnimal &operator=( const AAnimal &copy ) = 0;
+		virtual AAnimal &operator=( const AAnimal &copy );
 
-		void makeSound( void ) const;
+		virtual void makeSound( void ) const;
 		const std::string &getType( void ) const;
 		virtual Brain *getBrain( void ) const = 0;
 
 	protected:
 		std::string type;
 };
+
+std::ostream &operator<<( std::ostream &outStream, const AAnimal &animal );
 
 #endif
